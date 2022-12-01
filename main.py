@@ -1,5 +1,5 @@
 from time import sleep
-from ABook import *
+from ABook import ABook, Record
 
 
 def input_error(func):
@@ -59,7 +59,7 @@ def hello_handler(*args, **kwargs) -> str:
 def add_record(user_data: list) -> str:
     """Функція додає новий контакт у список контактів"""
 
-    name, phone = user_data[0], (None if not user_data[1:] else user_data[1:])
+    name, phone = user_data[0], [] if not user_data[1:] else user_data[1:]
     user_data = Record(name, phone)
     BOOK.add_record(user_data)
     return f"New contact '{name}' is added"

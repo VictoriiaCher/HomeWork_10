@@ -2,43 +2,33 @@ from collections import UserDict
 
 
 class Field:
-    pass
-
-
-class Name(Field):
-    def __init__(self, name) -> None:
-        self.value = name
+    def __init__(self, value) -> None:
+        self.value = value
 
     def __str__(self):
         return str(self.value)
 
 
-class Phone(Field):
-    def __init__(self, phone) -> None:
-        self.value = phone
+class Name(Field):
+    pass
 
-    def __repr__(self):
-        return str(self.value)
+
+class Phone(Field):
+    pass
 
 
 class Record:
     def __init__(self, name: Name, phone=None) -> None:
         self.name = Name(name)
-        self.phones = None
+        self.phones = []
         if phone:
-            self.phones = []
-            for number in phone:
-                self.phones.append(Phone(number))
+            self.add_phone(phone)
 
     def __repr__(self):
         return f"{self.name}: {self.phones}"
 
     def add_phone(self, phone):
-        if self.phones:
-            return self.phones.append(phone)
-        else:
-            self.phones = []
-            return self.phones.append(phone)
+        return self.phones.append(phone)
 
     def change_phone(self, old_phone, new_phone):
         for phone in self.phones:
@@ -59,4 +49,3 @@ class ABook(UserDict):
     def add_record(self, record):
         self.data[record.name.value] = record
         return self.data
-
